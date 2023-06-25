@@ -820,9 +820,17 @@
       <Project>{941207F7-EAAA-A296-1E3A-A48B1BDC3AC0}</Project>
       <Name>Unity.EditorCoroutines.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{276DB0FB-78AB-5099-7A5B-6829EC2F91C5}</Project>
+      <Name>Cinemachine</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Analytics.csproj">
       <Project>{BB0CF786-1EB1-8CA9-0F7B-8C1F683BFFF3}</Project>
       <Name>Unity.Services.Core.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{F33C3FFB-2DBE-8899-79F5-F4EE4F4BFF7D}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
       <Project>{A1A1975C-5696-04D3-BFF8-9172869C7C9F}</Project>

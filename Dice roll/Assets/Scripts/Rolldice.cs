@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Cinemachine;
 
 public class Rolldice : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class Rolldice : MonoBehaviour
     float rotX;
     float rotZ;
 
+    public GameObject topCam;
+    public GameObject cineCam;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +32,8 @@ public class Rolldice : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         started = false;
+
+        OverheadCam();
     }
 
     // Update is called once per frame
@@ -50,10 +56,11 @@ public class Rolldice : MonoBehaviour
             rotZ = 0;
         }
 
-        Debug.Log(started);
 
         if (Input.GetKeyDown("space"))
         {
+
+            FollowCam();
 
             started = true;
 
@@ -101,8 +108,24 @@ public class Rolldice : MonoBehaviour
             Number = "6";
         }
 
+        OverheadCam();
         tm.text = Number; //Changes the UI text to show the die roll result
 
+    }
+
+
+    public void OverheadCam()
+    {
+        cineCam.SetActive(false);
+        topCam.SetActive(true);
+        Debug.Log("OVERHEAD");
+    }
+
+    public void FollowCam()
+    {
+        cineCam.SetActive(true);
+        topCam.SetActive(false);
+        Debug.Log("CineCam");
     }
                
 }
