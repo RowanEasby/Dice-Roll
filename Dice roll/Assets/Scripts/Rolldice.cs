@@ -9,11 +9,10 @@ public class Rolldice : MonoBehaviour
     public GameObject die;
     public Rigidbody rb;
 
-    public string Number;
+    string Number;
 
     public TMP_Text tm;
 
-    public bool started;
 
     //Used to determine when the die has stopped moving
     float speed;
@@ -22,8 +21,8 @@ public class Rolldice : MonoBehaviour
     float rotX;
     float rotZ;
 
-    public GameObject topCam;
-    public GameObject cineCam;
+    public CinemachineVirtualCamera LookCam;
+    public CinemachineVirtualCamera TopCam;
 
 
     // Start is called before the first frame update
@@ -31,9 +30,6 @@ public class Rolldice : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        started = false;
-
-        OverheadCam();
     }
 
     // Update is called once per frame
@@ -62,8 +58,6 @@ public class Rolldice : MonoBehaviour
 
             FollowCam();
 
-            started = true;
-
             die.transform.position = new Vector3(0, 25, 3); //Moves the die up
             Vector3 dieRotation = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360)); //Creates a Vector3 with random rotations
             die.transform.eulerAngles = dieRotation; //Applies the above Vector3 to the Die
@@ -71,9 +65,8 @@ public class Rolldice : MonoBehaviour
         }
 
         //If the Die isn't moving
-        if ((speed < 0.1) && (started = true))
+        if (speed < 0.1)
         {
-
             Rolled();
         }
 
@@ -116,16 +109,14 @@ public class Rolldice : MonoBehaviour
 
     public void OverheadCam()
     {
-        cineCam.SetActive(false);
-        topCam.SetActive(true);
-        Debug.Log("OVERHEAD");
+        TopCam.gameObject.SetActive(true);
+        LookCam.gameObject.SetActive(false);
     }
 
     public void FollowCam()
     {
-        cineCam.SetActive(true);
-        topCam.SetActive(false);
-        Debug.Log("CineCam");
+        LookCam.gameObject.SetActive(true);
+        TopCam.gameObject.SetActive(false);
     }
                
 }
