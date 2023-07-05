@@ -9,6 +9,8 @@ public class Rolldice : MonoBehaviour
     public GameObject die;
     public Rigidbody rb;
 
+    public ParticleSystem particle;
+
     string Number;
 
     public TMP_Text tm;
@@ -29,7 +31,7 @@ public class Rolldice : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        FollowCam();
     }
 
     // Update is called once per frame
@@ -55,13 +57,21 @@ public class Rolldice : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-
-            FollowCam();
-
             die.transform.position = new Vector3(0, 25, 3); //Moves the die up
             Vector3 dieRotation = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360)); //Creates a Vector3 with random rotations
             die.transform.eulerAngles = dieRotation; //Applies the above Vector3 to the Die
             rb.velocity = new Vector3(Random.Range(-25,25), -10 , Random.Range(-25, 25));//Gives the Die random velocities on the X and Z axis
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            FollowCam();
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            OverheadCam();
         }
 
         //If the Die isn't moving
@@ -101,11 +111,9 @@ public class Rolldice : MonoBehaviour
             Number = "6";
         }
 
-        OverheadCam();
         tm.text = Number; //Changes the UI text to show the die roll result
 
     }
-
 
     public void OverheadCam()
     {
@@ -118,5 +126,15 @@ public class Rolldice : MonoBehaviour
         LookCam.gameObject.SetActive(true);
         TopCam.gameObject.SetActive(false);
     }
-               
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        particle.Play(true);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        particle.Play(false);
+    }
 }
